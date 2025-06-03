@@ -1,24 +1,35 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { forwardRef } from "react"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { AlertCircle } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { forwardRef } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { AlertCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FormFieldProps {
-  label: string
-  error?: string
-  required?: boolean
-  className?: string
-  children?: React.ReactNode
+  label: string;
+  error?: string;
+  required?: boolean;
+  className?: string;
+  children?: React.ReactNode;
 }
 
-export function FormField({ label, error, required, className, children }: FormFieldProps) {
+export function FormField({
+  label,
+  error,
+  required,
+  className,
+  children,
+}: FormFieldProps) {
   return (
     <div className={cn("space-y-2", className)}>
       <Label className="text-sm font-medium text-neutral-700">
@@ -33,30 +44,33 @@ export function FormField({ label, error, required, className, children }: FormF
         </div>
       )}
     </div>
-  )
+  );
 }
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: string
+  error?: string;
 }
 
-export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(({ error, className, ...props }, ref) => {
-  return (
-    <Input
-      ref={ref}
-      className={cn(
-        "h-12 border-neutral-200 focus:border-neutral-400 transition-colors",
-        error && "border-red-300 focus:border-red-400",
-        className,
-      )}
-      {...props}
-    />
-  )
-})
-FormInput.displayName = "FormInput"
+export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+  ({ error, className, ...props }, ref) => {
+    return (
+      <Input
+        ref={ref}
+        className={cn(
+          "h-12 border-neutral-200 focus:border-neutral-400 transition-colors",
+          error && "border-red-300 focus:border-red-400",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+FormInput.displayName = "FormInput";
 
-interface FormTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  error?: string
+interface FormTextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  error?: string;
 }
 
 export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
@@ -67,35 +81,41 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
         className={cn(
           "border-neutral-200 focus:border-neutral-400 transition-colors resize-none",
           error && "border-red-300 focus:border-red-400",
-          className,
+          className
         )}
         {...props}
       />
-    )
-  },
-)
-FormTextarea.displayName = "FormTextarea"
+    );
+  }
+);
+FormTextarea.displayName = "FormTextarea";
 
 interface FormSelectProps {
-  value: string
-  onValueChange: (value: string) => void
-  placeholder?: string
-  error?: string
-  children: React.ReactNode
+  value: string;
+  onValueChange: (value: string) => void;
+  placeholder?: string;
+  error?: string;
+  children: React.ReactNode;
 }
 
-export function FormSelect({ value, onValueChange, placeholder, error, children }: FormSelectProps) {
+export function FormSelect({
+  value,
+  onValueChange,
+  placeholder,
+  error,
+  children,
+}: FormSelectProps) {
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         className={cn(
           "h-12 border-neutral-200 focus:border-neutral-400",
-          error && "border-red-300 focus:border-red-400",
+          error && "border-red-300 focus:border-red-400"
         )}
       >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>{children}</SelectContent>
     </Select>
-  )
+  );
 }
